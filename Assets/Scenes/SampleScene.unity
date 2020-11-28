@@ -1898,6 +1898,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thrust: 10
   rollSpeed: 1
+  thrustBonus: 1
 --- !u!4 &615777881
 Transform:
   m_ObjectHideFlags: 0
@@ -1996,6 +1997,14 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 8fe33677-2365-4995-ad4c-4e72bf5f35e3
     m_ActionName: Player/Roll[/Keyboard/q,/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 50d1b396-91fb-4b34-b6a7-c47adb312db8
+    m_ActionName: Player/Accelerate[/Keyboard/shift]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 301652c4-b52f-4dbb-8559-e2bade0ec652
+    m_ActionName: Player/Decelerate[/Keyboard/ctrl]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
