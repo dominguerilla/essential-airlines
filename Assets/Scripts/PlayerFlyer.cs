@@ -37,6 +37,11 @@ public class PlayerFlyer : MonoBehaviour
         thrustFactor = 1;
     }
 
+    void DropBomb(InputAction.CallbackContext context)
+    {
+
+    }
+
     // Update is called once per frame
     void Update()
     {
