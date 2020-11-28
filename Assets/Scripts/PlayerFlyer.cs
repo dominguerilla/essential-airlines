@@ -24,7 +24,6 @@ public class PlayerFlyer : MonoBehaviour
         inputMap = GetComponent<PlayerInput>().actions;
         inputMap["Accelerate"].performed += BoostThrust;
         inputMap["Decelerate"].performed += ResetThrust;
-        inputMap.Enable();
     }
 
     void BoostThrust(InputAction.CallbackContext context)
@@ -35,11 +34,6 @@ public class PlayerFlyer : MonoBehaviour
     void ResetThrust(InputAction.CallbackContext context)
     {
         thrustFactor = 1;
-    }
-
-    void DropBomb(InputAction.CallbackContext context)
-    {
-
     }
 
     // Update is called once per frame
