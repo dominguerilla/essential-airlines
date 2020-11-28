@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class DropTarget : MonoBehaviour
 {
+    Scoreboard scoreboard;
+
+    private void Start()
+    {
+        scoreboard = GameObject.FindObjectOfType<Scoreboard>();
+    }
     public void Collect(DroppedObject drop)
     {
         Debug.Log($"Collected { drop.gameObject.name }!");
@@ -16,6 +22,11 @@ public class DropTarget : MonoBehaviour
         if (drop)
         {
             Collect(drop);
+            if (scoreboard)
+            {
+                scoreboard.Score(1);
+                scoreboard.LogScore();
+            }
         }
     }
 }
