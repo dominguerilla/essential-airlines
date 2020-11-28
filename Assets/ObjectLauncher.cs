@@ -7,6 +7,8 @@ public class ObjectLauncher : MonoBehaviour
 {
     public GameObject launchPrefab;
     public float instantiateDistance = 1f;
+    [SerializeField] float launchSpeed = 16f;
+
     InputActionAsset inputMap;
 
     bool _isEngaged = false;
@@ -15,7 +17,6 @@ public class ObjectLauncher : MonoBehaviour
     void Start()
     {
         SetupInput();
-        Engage();
     }
 
     public void Engage()
@@ -28,6 +29,18 @@ public class ObjectLauncher : MonoBehaviour
     {
         _isEngaged = false;
         Debug.Log($"{ gameObject.name } LAUNCHER DISENGAGED.");
+    }
+
+    public void ToggleEngage()
+    {
+        if (_isEngaged)
+        {
+            DisEngage();
+        }
+        else
+        {
+            Engage();
+        }
     }
 
     void SetupInput(){
@@ -52,7 +65,7 @@ public class ObjectLauncher : MonoBehaviour
         DroppedObject drop = launchedObject.GetComponent<DroppedObject>();
         if (drop)
         {
-            drop.Launch(direction);
+            drop.Launch(direction, launchSpeed);
         }
     }
 

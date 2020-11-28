@@ -1245,7 +1245,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!81 &614277224
 AudioListener:
   m_ObjectHideFlags: 0
@@ -1419,6 +1419,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   launchPrefab: {fileID: 4480473465018360369, guid: 2d90583add77cec4082e26612960906e, type: 3}
   instantiateDistance: 1
+  launchSpeed: 16
 --- !u!1 &624745175
 GameObject:
   m_ObjectHideFlags: 0
@@ -2902,10 +2903,6 @@ PrefabInstance:
     - target: {fileID: 4419863983443223248, guid: 9f670c91effc95d47b1adf201ea428a7, type: 3}
       propertyPath: m_Name
       value: Plane
-      objectReference: {fileID: 0}
-    - target: {fileID: 4419863983443223248, guid: 9f670c91effc95d47b1adf201ea428a7, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4419863983443223262, guid: 9f670c91effc95d47b1adf201ea428a7, type: 3}
       propertyPath: m_LocalPosition.x

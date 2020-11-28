@@ -5,7 +5,6 @@ using UnityEngine;
 public class DroppedObject : MonoBehaviour
 {
     [SerializeField] float dropSpeed = 9.81f;
-    [SerializeField] float launchSpeed = 16f;
 
     bool _isDropping = false;
 
@@ -20,7 +19,7 @@ public class DroppedObject : MonoBehaviour
         StartCoroutine(StartDrop(dropSpeed));
     }
 
-    public void Launch(Vector3 direction)
+    public void Launch(Vector3 direction, float launchSpeed)
     {
         StartCoroutine(StartLaunch(direction, launchSpeed));
     }

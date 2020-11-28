@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(PlayerInput), typeof(ObjectLauncher))]
 public class PlayerFlyer : MonoBehaviour
 {
     public float thrust = 10f;
     public float rollSpeed = 1f;
     [SerializeField] int thrustBonus = 0;
-    InputActionAsset inputMap;
 
+    InputActionAsset inputMap;
+    ObjectLauncher launcher;
     int thrustFactor = 1;
     
     
@@ -17,6 +19,7 @@ public class PlayerFlyer : MonoBehaviour
     void Start()
     {
         SetupInput();
+        launcher = GetComponent<ObjectLauncher>();
     }
 
     void SetupInput()
@@ -24,6 +27,7 @@ public class PlayerFlyer : MonoBehaviour
         inputMap = GetComponent<PlayerInput>().actions;
         inputMap["Accelerate"].performed += BoostThrust;
         inputMap["Decelerate"].performed += ResetThrust;
+        inputMap["Toggle Engage"].performed += ToggleLauncherEngage;
     }
 
     void BoostThrust(InputAction.CallbackContext context)
@@ -34,6 +38,11 @@ public class PlayerFlyer : MonoBehaviour
     void ResetThrust(InputAction.CallbackContext context)
     {
         thrustFactor = 1;
+    }
+
+    void ToggleLauncherEngage(InputAction.CallbackContext context)
+    {
+        launcher.ToggleEngage();
     }
 
     // Update is called once per frame
