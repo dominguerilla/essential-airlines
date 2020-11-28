@@ -1897,6 +1897,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   thrust: 10
+  rollSpeed: 1
 --- !u!4 &615777881
 Transform:
   m_ObjectHideFlags: 0
@@ -1991,6 +1992,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 98f4763b-baba-4e5f-ad5d-5c4f55095543
     m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8fe33677-2365-4995-ad4c-4e72bf5f35e3
+    m_ActionName: Player/Roll[/Keyboard/q,/Keyboard/e]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

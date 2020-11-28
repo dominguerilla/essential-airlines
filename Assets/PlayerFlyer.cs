@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class PlayerFlyer : MonoBehaviour
 {
     public float thrust = 10f;
+    public float rollSpeed = 1f;
     InputActionAsset inputMap;
     
     // Start is called before the first frame update
@@ -27,6 +28,7 @@ public class PlayerFlyer : MonoBehaviour
     {
         transform.Translate(transform.InverseTransformDirection(transform.forward) * Time.deltaTime * thrust);
         Vector2 moveDirection = inputMap["Move"].ReadValue<Vector2>();
-        transform.Rotate(moveDirection.y, moveDirection.x, 0);
+        float rollDirection = inputMap["Roll"].ReadValue<float>();
+        transform.Rotate(moveDirection.y, moveDirection.x, rollDirection * rollSpeed);
     }
 }
