@@ -5,6 +5,7 @@ using UnityEngine;
 public class DroppedObject : MonoBehaviour
 {
     [SerializeField] float dropSpeed = 9.81f;
+    [SerializeField] float dropLifetime = 12f;
 
     bool _isDropping = false;
 
@@ -27,6 +28,7 @@ public class DroppedObject : MonoBehaviour
     IEnumerator StartLaunch(Vector3 direction, float launchSpeed)
     {
         _isDropping = true;
+        Destroy(this.gameObject, dropLifetime);
         while (_isDropping)
         {
             transform.position += direction * launchSpeed * Time.deltaTime;

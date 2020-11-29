@@ -23,7 +23,7 @@ public class PowerUp : MonoBehaviour
         while (_isRotating)
         {
             transform.Rotate(0, 0, rotateSpeed);
-            yield return null;
+            yield return new WaitForEndOfFrame();
         }
     }
 

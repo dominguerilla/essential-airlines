@@ -687,8 +687,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10dde4a477e1d5c4cbc87b1f43895796, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thrust: 20
-  rollSpeed: 3
+  thrust: 32
+  rollSpeed: 1
   thrustBonus: 1
   onCollect:
     m_PersistentCalls:

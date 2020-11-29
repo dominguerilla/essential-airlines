@@ -96,8 +96,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6316b8cb398bcec47a4d92ad4abb8a59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotateSpeed: 5
+  rotateSpeed: 2
   ammoAmount: 5
+  onDestroy:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!54 &7074336382709853637
 Rigidbody:
   m_ObjectHideFlags: 0
