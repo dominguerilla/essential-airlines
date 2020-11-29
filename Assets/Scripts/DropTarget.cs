@@ -27,7 +27,6 @@ public class DropTarget : MonoBehaviour
 
     public void Collect(DroppedObject drop)
     {
-        Debug.Log($"Collected { drop.gameObject.name }!");
         Destroy(drop.gameObject);
         DisableTarget();
     }

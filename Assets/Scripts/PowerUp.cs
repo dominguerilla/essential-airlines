@@ -1,10 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PowerUp : MonoBehaviour
 {
     [SerializeField] float rotateSpeed = 5f;
+    [SerializeField] int ammoAmount = 5;
+    public UnityEvent onDestroy = new UnityEvent();
 
     bool _isRotating = false;
 
@@ -29,8 +32,13 @@ public class PowerUp : MonoBehaviour
         PlayerFlyer player = other.GetComponentInParent<PlayerFlyer>();
         if (player)
         {
-            player.AddAmmo(1);
+            player.AddAmmo(ammoAmount);
             Destroy(this.gameObject);
         }
+    }
+
+    private void OnDestroy()
+    {
+        onDestroy.Invoke();
     }
 }
