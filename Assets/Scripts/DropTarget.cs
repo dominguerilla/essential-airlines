@@ -14,6 +14,7 @@ public class DropTarget : MonoBehaviour
     {
         Debug.Log($"Collected { drop.gameObject.name }!");
         Destroy(drop.gameObject);
+        Destroy(this.gameObject);
     }
 
     private void OnTriggerEnter(Collider other)

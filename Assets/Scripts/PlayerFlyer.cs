@@ -19,6 +19,8 @@ public class PlayerFlyer : MonoBehaviour
     {
         SetupInput();
         launcher = GetComponent<ObjectLauncher>();
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     void SetupInput()

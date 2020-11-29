@@ -38,6 +38,9 @@ public class ObjectLauncher : MonoBehaviour
         originalCameraLocalEulers = cam.transform.localEulerAngles;
         cam.transform.localPosition = launchCameraPositionOffset;
         cam.transform.localEulerAngles = launchCameraLocalEulers;
+
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
         Debug.Log($"{ gameObject.name } LAUNCHER ENGAGED.");
     }
 
@@ -50,6 +53,9 @@ public class ObjectLauncher : MonoBehaviour
         _isEngaged = false;
         cam.transform.localPosition = originalCameraOffset;
         cam.transform.localEulerAngles = originalCameraLocalEulers;
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         cam = null;
         Debug.Log($"{ gameObject.name } LAUNCHER DISENGAGED.");
     }
