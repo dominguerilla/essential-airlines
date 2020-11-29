@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(PlayerInput), typeof(ObjectLauncher))]
 public class PlayerFlyer : MonoBehaviour
@@ -9,6 +10,8 @@ public class PlayerFlyer : MonoBehaviour
     public float thrust = 10f;
     public float rollSpeed = 1f;
     [SerializeField] int thrustBonus = 0;
+
+    public UnityEvent onCollect = new UnityEvent();
 
     InputActionAsset inputMap;
     ObjectLauncher launcher;
@@ -57,6 +60,7 @@ public class PlayerFlyer : MonoBehaviour
 
     public void AddAmmo(int ammount)
     {
+        onCollect.Invoke();
         launcher.AddAmmo(ammount);
     }
 }

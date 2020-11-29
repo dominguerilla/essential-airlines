@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class DropTarget : MonoBehaviour
 {
     [SerializeField] Material enabledMaterial;
     [SerializeField] Material disabledMaterial;
     [SerializeField] Renderer[] renderers;
+    [SerializeField] UnityEvent onCollect = new UnityEvent();
 
     Scoreboard scoreboard;
 
@@ -28,6 +30,8 @@ public class DropTarget : MonoBehaviour
     public void Collect(DroppedObject drop)
     {
         Destroy(drop.gameObject);
+        onCollect.Invoke();
+
         DisableTarget();
     }
 
