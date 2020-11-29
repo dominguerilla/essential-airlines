@@ -1,14 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Scoreboard : MonoBehaviour
 {
+    [SerializeField] Text scoreText;
     int _currentScore = 0;
 
     private void Start()
     {
-        LogScore();
+        UpdateUI();
     }
 
     public void LogScore()
@@ -19,5 +21,13 @@ public class Scoreboard : MonoBehaviour
     public void Score(int pointNum)
     {
         _currentScore += pointNum;
+        UpdateUI();
+    }
+
+    void UpdateUI()
+    {
+        string txt = $"{_currentScore}";
+        if (_currentScore < 10) txt = "0" + txt;
+        scoreText.text = txt;
     }
 }

@@ -25,7 +25,6 @@ public class DropTarget : MonoBehaviour
             if (scoreboard)
             {
                 scoreboard.Score(1);
-                scoreboard.LogScore();
             }
         }
     }
