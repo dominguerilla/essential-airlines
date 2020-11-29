@@ -29,7 +29,7 @@ public class PowerUp : MonoBehaviour
         PlayerFlyer player = other.GetComponentInParent<PlayerFlyer>();
         if (player)
         {
-            Debug.Log("Pickup!");
+            player.AddAmmo(1);
             Destroy(this.gameObject);
         }
     }

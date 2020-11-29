@@ -2,27 +2,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class ObjectLauncher : MonoBehaviour
 {
+    [Header("UI")]
+    [SerializeField] Text ammoCount;
+    [SerializeField] string countPrefix;
+
+    [Header("Launcher parameters")]
     public GameObject launchPrefab;
     public float instantiateDistance = 1f;
     [SerializeField] float launchSpeed = 16f;
-
-    InputActionAsset inputMap;
-
-    [Header("Launcher parameters")]
     public Vector3 launchCameraPositionOffset;
     public Vector3 launchCameraLocalEulers;
+    InputActionAsset inputMap;
 
     bool _isEngaged = false;
     Vector3 originalCameraOffset;
     Vector3 originalCameraLocalEulers;
     Camera cam;
+    int currentAmmo = 0;
     // Start is called before the first frame update
     void Start()
     {
         SetupInput();
+        UpdateUI();
     }
 
     public void Engage(Camera camera)
@@ -75,11 +80,12 @@ public class ObjectLauncher : MonoBehaviour
 
     public void Launch(InputAction.CallbackContext context)
     {
-        if (_isEngaged)
+        if (_isEngaged && currentAmmo > 0)
         {
             Vector3 launchVector = GetLaunchVector(context);
             LaunchObject(launchVector);
-            Debug.Log("Launch!");
+            currentAmmo--;
+            UpdateUI();
         }
         
     }
@@ -101,5 +107,18 @@ public class ObjectLauncher : MonoBehaviour
         Vector3 mouseVector3 = new Vector3(mousePosition.x, mousePosition.y);
         Ray ray = Camera.main.ScreenPointToRay(mouseVector3);
         return ray.direction;
+    }
+
+    void UpdateUI()
+    {
+        string strCount = $"{currentAmmo}";
+        if (currentAmmo < 10) strCount = "0" + strCount;
+        ammoCount.text = countPrefix + strCount;
+    }
+
+    public void AddAmmo(int amount)
+    {
+        currentAmmo += amount;
+        UpdateUI();
     }
 }

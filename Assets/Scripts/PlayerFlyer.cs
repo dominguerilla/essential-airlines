@@ -14,7 +14,6 @@ public class PlayerFlyer : MonoBehaviour
     ObjectLauncher launcher;
     int thrustFactor = 1;
     
-    
     // Start is called before the first frame update
     void Start()
     {
@@ -52,5 +51,10 @@ public class PlayerFlyer : MonoBehaviour
         Vector2 moveDirection = inputMap["Move"].ReadValue<Vector2>();
         float rollDirection = inputMap["Roll"].ReadValue<float>();
         transform.Rotate(moveDirection.y, moveDirection.x, rollDirection * rollSpeed);
+    }
+
+    public void AddAmmo(int ammount)
+    {
+        launcher.AddAmmo(ammount);
     }
 }
