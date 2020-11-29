@@ -11,41 +11,66 @@ public class ObjectLauncher : MonoBehaviour
 
     InputActionAsset inputMap;
 
-    bool _isEngaged = false;
+    [Header("Launcher parameters")]
+    public Vector3 launchCameraPositionOffset;
+    public Vector3 launchCameraLocalEulers;
 
+    bool _isEngaged = false;
+    Vector3 originalCameraOffset;
+    Vector3 originalCameraLocalEulers;
+    Camera cam;
     // Start is called before the first frame update
     void Start()
     {
         SetupInput();
     }
 
-    public void Engage()
+    public void Engage(Camera camera)
     {
         _isEngaged = true;
+        cam = camera;
+        originalCameraOffset = cam.transform.localPosition;
+        originalCameraLocalEulers = cam.transform.localEulerAngles;
+        cam.transform.localPosition = launchCameraPositionOffset;
+        cam.transform.localEulerAngles = launchCameraLocalEulers;
         Debug.Log($"{ gameObject.name } LAUNCHER ENGAGED.");
     }
 
-    public void DisEngage()
+    public void DisEngage(Camera camera)
     {
+        if (camera != cam)
+        {
+            throw new System.InvalidOperationException("Wrong camera being disengaged!");
+        }
         _isEngaged = false;
+        cam.transform.localPosition = originalCameraOffset;
+        cam.transform.localEulerAngles = originalCameraLocalEulers;
+        cam = null;
         Debug.Log($"{ gameObject.name } LAUNCHER DISENGAGED.");
     }
 
-    public void ToggleEngage()
+    public bool ToggleEngage(Camera camera)
     {
         if (_isEngaged)
         {
-            DisEngage();
+            DisEngage(camera);
         }
         else
         {
-            Engage();
+            Engage(camera);
         }
+
+        return _isEngaged;
     }
 
     void SetupInput(){
         inputMap = GetComponent<PlayerInput>().actions;
         inputMap["Fire"].performed += Launch;
+    }
+
+    void SetupCamera()
+    {
+        
     }
 
     public void Launch(InputAction.CallbackContext context)

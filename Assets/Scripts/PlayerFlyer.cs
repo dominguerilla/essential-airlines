@@ -42,7 +42,7 @@ public class PlayerFlyer : MonoBehaviour
 
     void ToggleLauncherEngage(InputAction.CallbackContext context)
     {
-        launcher.ToggleEngage();
+        bool isEngaged = launcher.ToggleEngage(Camera.main);
     }
 
     // Update is called once per frame

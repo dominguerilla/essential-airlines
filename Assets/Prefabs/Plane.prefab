@@ -492,6 +492,8 @@ MonoBehaviour:
   launchPrefab: {fileID: 4480473465018360369, guid: 2d90583add77cec4082e26612960906e, type: 3}
   instantiateDistance: 1
   launchSpeed: 64
+  launchCameraPositionOffset: {x: -0.1, y: -0.5, z: -2.75}
+  launchCameraLocalEulers: {x: 21, y: 0, z: 0}
 --- !u!1 &4419863983909631238
 GameObject:
   m_ObjectHideFlags: 0
@@ -814,13 +816,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4419863983925758454}
-  m_LocalRotation: {x: -0.067449346, y: 0.000000014901159, z: 0.0000000027939675, w: 0.99772274}
-  m_LocalPosition: {x: -0.06619263, y: 4.218796, z: -16.745796}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.06619263, y: 5, z: -16.745796}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4419863983443223262}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: -7.735, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &4419863983925758452
 Camera:
   m_ObjectHideFlags: 0
