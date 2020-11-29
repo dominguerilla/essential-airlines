@@ -5,9 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
-    public void LoadScene()
+    public void LoadScene(int index)
     {
-        StartCoroutine(LoadSceneAsync());
+        Time.timeScale = 1;
+        StartCoroutine(LoadSceneAsync(index));
     }
 
     public void Quit()
@@ -15,9 +16,9 @@ public class SceneLoader : MonoBehaviour
         Application.Quit();
     }
 
-    IEnumerator LoadSceneAsync()
+    IEnumerator LoadSceneAsync(int index)
     {
-        AsyncOperation load = SceneManager.LoadSceneAsync(1);
+        AsyncOperation load = SceneManager.LoadSceneAsync(index);
         while (!load.isDone)
         {
             yield return null;

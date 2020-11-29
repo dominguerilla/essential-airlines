@@ -41,7 +41,7 @@ public class ObjectLauncher : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
-        Debug.Log($"{ gameObject.name } LAUNCHER ENGAGED.");
+        //Debug.Log($"{ gameObject.name } LAUNCHER ENGAGED.");
     }
 
     public void DisEngage(Camera camera)
@@ -57,7 +57,7 @@ public class ObjectLauncher : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         cam = null;
-        Debug.Log($"{ gameObject.name } LAUNCHER DISENGAGED.");
+        //Debug.Log($"{ gameObject.name } LAUNCHER DISENGAGED.");
     }
 
     public bool ToggleEngage(Camera camera)
