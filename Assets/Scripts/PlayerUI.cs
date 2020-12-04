@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerUI : MonoBehaviour
 {
+    [SerializeField] GameObject playerObject;
     [SerializeField] GameObject inGameUI;
     [SerializeField] GameObject pauseMenuUI;
 
@@ -17,9 +18,17 @@ public class PlayerUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (playerObject == null) 
+        {
+            Debug.LogError($"Player not set on {gameObject.name}!");
+            Destroy(this);
+            return;
+        }
+
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        inputMap = GetComponent<PlayerInput>().actions;
+
+        inputMap = playerObject.GetComponent<PlayerInput>().actions;
         inputMap["Pause"].performed += TogglePause;
     }
 
