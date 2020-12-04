@@ -52,7 +52,7 @@ public class PlayerFlyer : MonoBehaviour
     {
         transform.Translate(transform.InverseTransformDirection(transform.forward) * Time.deltaTime * thrust * thrustFactor);
         Vector2 moveDirection = inputMap["Move"].ReadValue<Vector2>();
-        float rollDirection = inputMap["Roll"].ReadValue<float>();
+        float rollDirection = -inputMap["Roll"].ReadValue<float>();
         transform.Rotate(moveDirection.y, moveDirection.x, rollDirection * rollSpeed);
     }
 
