@@ -180,6 +180,8 @@ MonoBehaviour:
   playerObject: {fileID: 0}
   inGameUI: {fileID: 4205804423973388759}
   pauseMenuUI: {fileID: 8577990937329575282}
+  cursorTexture: {fileID: 2800000, guid: b8be72d6c304f5540b3caebe16381bab, type: 3}
+  cursorOffset: {x: 32, y: 32}
 --- !u!1 &838835130974614152
 GameObject:
   m_ObjectHideFlags: 0

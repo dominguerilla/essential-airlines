@@ -8,6 +8,8 @@ public class PlayerUI : MonoBehaviour
     [SerializeField] GameObject playerObject;
     [SerializeField] GameObject inGameUI;
     [SerializeField] GameObject pauseMenuUI;
+    [SerializeField] Texture2D cursorTexture;
+    [SerializeField] Vector2 cursorOffset;
 
     InputActionAsset inputMap;
     bool _isPaused = false;
@@ -25,11 +27,7 @@ public class PlayerUI : MonoBehaviour
             return;
         }
 
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-
-        inputMap = playerObject.GetComponent<PlayerInput>().actions;
-        inputMap["Pause"].performed += TogglePause;
+        InitControls();
     }
 
     public void TogglePause(InputAction.CallbackContext context)
@@ -68,5 +66,15 @@ public class PlayerUI : MonoBehaviour
 
         Time.timeScale = 1;
         _isPaused = false;
+    }
+
+    void InitControls()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        Cursor.SetCursor(cursorTexture, cursorOffset, CursorMode.Auto);
+
+        inputMap = playerObject.GetComponent<PlayerInput>().actions;
+        inputMap["Pause"].performed += TogglePause;
     }
 }
