@@ -8,6 +8,7 @@ public class DropTarget : MonoBehaviour
     [SerializeField] Material enabledMaterial;
     [SerializeField] Material disabledMaterial;
     [SerializeField] Renderer[] renderers;
+    [SerializeField] ParticleSystem onCollectParticles;
     [SerializeField] UnityEvent onCollect = new UnityEvent();
 
     Scoreboard scoreboard;
@@ -27,11 +28,13 @@ public class DropTarget : MonoBehaviour
         }
     }
 
-    public void Collect(DroppedObject drop)
+    public void Collect(DroppedObject drop, Vector3 particlePlayPosition)
     {
+        onCollectParticles.transform.position = particlePlayPosition;
+        onCollectParticles.Play();
         Destroy(drop.gameObject);
-        onCollect.Invoke();
 
+        onCollect.Invoke();
         DisableTarget();
     }
 
@@ -59,7 +62,7 @@ public class DropTarget : MonoBehaviour
         DroppedObject drop = other.GetComponent<DroppedObject>();
         if (drop)
         {
-            Collect(drop);
+            Collect(drop, other.transform.position);
             if (scoreboard)
             {
                 scoreboard.Score(1);
