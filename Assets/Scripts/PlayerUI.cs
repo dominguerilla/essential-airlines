@@ -6,11 +6,18 @@ using UnityEngine.UI;
 
 public class PlayerUI : MonoBehaviour
 {
+    [Header("Game")]
+    [SerializeField] float gameDuration = 60f;
+
+    [Header("Scene")]
     [SerializeField] PlayerInput player;
     [SerializeField] GameObject inGameUI;
     [SerializeField] GameObject pauseMenuUI;
     [SerializeField] GameObject startScreenUI;
     [SerializeField] Text startScreenTimer;
+    [SerializeField] Text gameTimer;
+
+    [Header("Cursor")]
     [SerializeField] Texture2D cursorTexture;
     [SerializeField] Vector2 cursorOffset;
 
@@ -93,19 +100,33 @@ public class PlayerUI : MonoBehaviour
 
     IEnumerator StartLevel(float pauseDuration)
     {
+        yield return StartTimer(pauseDuration, startScreenTimer);
+        player.ActivateInput();
+        startScreenUI.SetActive(false);
+
+        yield return StartGameClock();
+    }
+
+    IEnumerator StartTimer(float duration, Text timer)
+    {
         float timePassed = 0f;
-        while (timePassed < pauseDuration)
+        while (timePassed < duration)
         {
             timePassed += Time.unscaledDeltaTime;
-            var timeLeft = (decimal)(pauseDuration - timePassed);
+            var timeLeft = (decimal)(duration - timePassed);
 
             timeLeft = RoundNum(timeLeft);
 
-            startScreenTimer.text =  timeLeft + "";
+            timer.text = timeLeft + "";
             yield return null;
         }
-        player.ActivateInput();
-        startScreenUI.SetActive(false);
+        yield return null;
+    }
+
+    IEnumerator StartGameClock()
+    {
+        yield return StartTimer(gameDuration, gameTimer);
+        Debug.Log("Game finished!");
     }
 
     decimal RoundNum(decimal num)

@@ -178,11 +178,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 518a86d2525c5bb4f9bce453ec45a6f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameDuration: 60
   player: {fileID: 0}
   inGameUI: {fileID: 8871962788172660577}
   pauseMenuUI: {fileID: 8577990937329575282}
   startScreenUI: {fileID: 5064590002733087090}
   startScreenTimer: {fileID: 5064590002316068693}
+  gameTimer: {fileID: 4205804424232690732}
   cursorTexture: {fileID: 2800000, guid: b8be72d6c304f5540b3caebe16381bab, type: 3}
   cursorOffset: {x: 32, y: 32}
 --- !u!1 &1121761960201579551
