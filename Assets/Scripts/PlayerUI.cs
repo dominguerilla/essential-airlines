@@ -8,21 +8,24 @@ public class PlayerUI : MonoBehaviour
 {
     [Header("Game")]
     [SerializeField] float gameDuration = 60f;
+    [SerializeField] float startingPauseDuration = 3f;
 
     [Header("Scene")]
     [SerializeField] PlayerInput player;
     [SerializeField] GameObject inGameUI;
     [SerializeField] GameObject pauseMenuUI;
     [SerializeField] GameObject startScreenUI;
+    [SerializeField] GameObject endScreenUI;
     [SerializeField] Text startScreenTimer;
     [SerializeField] Text gameTimer;
+    [SerializeField] Text finalScoreText;
 
     [Header("Cursor")]
     [SerializeField] Texture2D cursorTexture;
     [SerializeField] Vector2 cursorOffset;
 
-    float startingPauseDuration = 5f;
     InputActionAsset inputMap;
+    Scoreboard playerScoreboard;
     bool _isPaused = false;
 
     CursorLockMode _previousLockState;
@@ -31,13 +34,19 @@ public class PlayerUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (player == null) 
+        if (player == null)
         {
             Debug.LogError($"Player not set on {gameObject.name}!");
             Destroy(this);
             return;
         }
-        
+
+        playerScoreboard = player.GetComponent<Scoreboard>();
+        if (!playerScoreboard)
+        {
+            Debug.LogError($"Scoreboard not found on { player.gameObject.name }!");
+        }
+
         InitControls();
         InitLevel();
     }
@@ -83,7 +92,7 @@ public class PlayerUI : MonoBehaviour
     void InitControls()
     {
         Cursor.SetCursor(cursorTexture, cursorOffset, CursorMode.Auto);
-        inputMap = player.GetComponent<PlayerInput>().actions;
+        inputMap = player.actions;
         inputMap["Pause"].performed += TogglePause;
     }
 
@@ -100,19 +109,49 @@ public class PlayerUI : MonoBehaviour
 
     IEnumerator StartLevel(float pauseDuration)
     {
-        yield return StartTimer(pauseDuration, startScreenTimer);
+        yield return StartTimer(pauseDuration, startScreenTimer, unscaled: true);
         player.ActivateInput();
         startScreenUI.SetActive(false);
 
         yield return StartGameClock();
+
+        EndLevel();
     }
 
-    IEnumerator StartTimer(float duration, Text timer)
+    void EndLevel()
+    {
+        Time.timeScale = 0;
+        player.DeactivateInput();
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
+        inGameUI.SetActive(false);
+
+        int score;
+        if (playerScoreboard)
+        {
+            score = playerScoreboard.GetScore();
+        }
+        else
+        {
+            score = -1;
+        }
+
+        InitEndScreen(score);
+    }
+
+    void InitEndScreen(int finalScore)
+    {
+        endScreenUI.SetActive(true);
+        finalScoreText.text += finalScore + "";
+    }
+
+    IEnumerator StartTimer(float duration, Text timer, bool unscaled=false)
     {
         float timePassed = 0f;
         while (timePassed < duration)
         {
-            timePassed += Time.unscaledDeltaTime;
+            float delta = unscaled ? Time.unscaledDeltaTime : Time.deltaTime;
+            timePassed += delta;
             var timeLeft = (decimal)(duration - timePassed);
 
             timeLeft = RoundNum(timeLeft);
@@ -126,7 +165,6 @@ public class PlayerUI : MonoBehaviour
     IEnumerator StartGameClock()
     {
         yield return StartTimer(gameDuration, gameTimer);
-        Debug.Log("Game finished!");
     }
 
     decimal RoundNum(decimal num)

@@ -24,6 +24,11 @@ public class Scoreboard : MonoBehaviour
         UpdateUI();
     }
 
+    public int GetScore()
+    {
+        return _currentScore;
+    }
+
     void UpdateUI()
     {
         string txt = $"{_currentScore}";
